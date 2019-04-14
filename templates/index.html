@@ -1,4 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-    这里是首页，欢迎光临
+    <h2>Student panel, Hi {{ user.get_role_display }} {{ user.first_name }} </h2>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Your Course
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="student-table" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Couser id</th>
+                        <th>course name</th>
+                        <th>Course dec</th>
+                        <th>Prof name</th>
+                        <th>Prof email</th>
+                        <th>Prof office</th>
+                        <th>Course grade</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    {% for course in courses %}
+                        <td><span class="text-info">{{ course.course_id }}</span></td>
+                        <td><span class="text-info">{{ course.course_name }}</span></td>
+                        <td><span class="text-info">{{ course.course_description }}</span></td>
+                        <td><span class="text-info">{{ course.course_prof.first_name }}</span></td>
+                        <td><span class="text-info">{{ course.course_prof.email }}</span></td>
+                        <td><span class="text-info">{{ course.course_prof.office_address }}</span></td>
+                        <td><span class="text-info">{{ course.grade }}</span></td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

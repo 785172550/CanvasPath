@@ -22,15 +22,23 @@
     <link href="/static/css/text-style.css" rel="stylesheet">
     <title>{% block title %}默认标题{% endblock %}</title>
 </head>
-<body>
+<body id="page-top">
 {% include "fragment/navbar.html" %}
 <div id="wrapper">
     {% include "fragment/side-bar.html" %}
-    <div id="content-wrapper">
-        {% block content %}
-        {% endblock %}
-    </div>
+{#    <div class="panel panel-default">#}
+
+            <div id="content-wrapper">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+{#    </div>#}
 </div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 <!-- Bootstrap core JavaScript-->
 <script src="/static/vendor/jquery/jquery.min.js"></script>
 <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -45,5 +53,8 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/static/js/sb-admin.min.js"></script>
+
+<script src="/static/js/utils.js"></script>
+
 </body>
 </html>

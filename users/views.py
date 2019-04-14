@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm
+from .forms import LoginForm, CourseForm, UserForm
 from django.contrib.auth import login as slogin, authenticate, logout as slogout
+from .models import CustomUser, Course
 
 
 # Create your views here.
@@ -14,7 +15,7 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user:
                 slogin(request, user)
-                print("OK................")
+                print(user.username + " login success!")
                 return redirect('/index')
             else:
                 message = "loging error"
@@ -27,4 +28,40 @@ def login(request):
 
 def logout(request):
     slogout(request)
-    return redirect('login/')
+    return redirect('login')
+
+
+def manage_course(request):
+    if request.method == 'POST':
+        course_form = CourseForm(request.POST)
+        if course_form.is_valid():
+            course_id = course_form.cleaned_data['course_id']
+            name = course_form.cleaned_data['course_name']
+            description = course_form.cleaned_data['course_description']
+            course = Course.objects.get(course_id=course_id)
+            if course:
+                course.course_description = description
+                course.save()
+            else:
+                Course.objects.create(course_id=course_id, course_name=name, course_description=description)
+    elif request.method == 'GET':
+        course_id = request.GET.get('delete_id', None)
+        if course_id:
+            Course.objects.get(course_id=course_id).delete()
+    redirect('index')
+
+
+def manage_user(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        if user_form.is_valid():
+            username = user_form.cleaned_data['username']
+            email = user_form.cleaned_data['email']
+            password = course_form.cleaned_data['password']
+            role = course_form.cleaned_data['role']
+            name = course_form.cleaned_data['name']
+            u = CustomUser.objects.get(username=username)
+            if u:
+                CustomUser.objects.filter(username=username).update(email=email, password=password, role=role, first_name=name)
+            else:
+                CustomUser.objects.create(username=username, email=email, password=password, role=role, first_name=name)

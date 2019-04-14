@@ -89,7 +89,7 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',   # engine
-        'NAME': 'info',  # db name
+        'NAME': 'mysite2',  # db name
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -140,4 +140,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 
-# AUTH_USER_MODEL = "users.Student"
+AUTH_USER_MODEL = "users.CustomUser"
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'users.backends.EmailBackend',
+)
