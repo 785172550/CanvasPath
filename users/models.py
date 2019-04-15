@@ -53,7 +53,7 @@ class Course(models.Model):
     course_id = models.CharField(primary_key=True, max_length=10)
     course_name = models.TextField()
     course_description = models.TextField(null=True)
-    course_prof = models.ForeignKey('CustomUser', on_delete=models.SET_NULL, null=True)
+    course_prof = models.ForeignKey('CustomUser',to_field='email', on_delete=models.SET_NULL, null=True)
     grade = models.CharField(max_length=5, null=True)
 
 

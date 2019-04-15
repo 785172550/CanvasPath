@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, CourseForm, UserForm
 from django.contrib.auth import login as slogin, authenticate, logout as slogout
-from .models import CustomUser, Course
+from .models import CustomUser, Course, Enrolls, Sections
+from django.http import JsonResponse, HttpResponse
 
 
 # Create your views here.
@@ -62,6 +63,41 @@ def manage_user(request):
             name = course_form.cleaned_data['name']
             u = CustomUser.objects.get(username=username)
             if u:
-                CustomUser.objects.filter(username=username).update(email=email, password=password, role=role, first_name=name)
+                CustomUser.objects.filter(username=username).update(email=email, password=password, role=role,
+                                                                    first_name=name)
             else:
                 CustomUser.objects.create(username=username, email=email, password=password, role=role, first_name=name)
+
+
+def enroll_student(request):
+    if request.method == 'GET':
+        email = request.GET.get('student_email', None)
+        course_id = request.GET.get('course', None)
+        sec_no = Sections.objects.filter(course_id=course_id).all()
+        en = Enrolls.objects.create(student_email=email, course_id=course_id, section_no=sec_no)
+        return JsonResponse(en)
+
+
+def assign_prof(request):
+    if request.method == 'GET':
+        email = request.GET.get('prof_email', None)
+        course_id = request.GET.get('course', None)
+        # sec_no = Sections.objects.filter(course_id=course_id).all()
+        cour = Course.objects.filter(course_id=course_id).update(course_prof=email)
+        return JsonResponse(cour)
+
+
+def create_hw(request):
+    pass
+
+
+def create_exam(request):
+    pass
+
+
+def create_hw_grade(request):
+    pass
+
+
+def create_exam_grade(request):
+    pass
