@@ -56,5 +56,6 @@
 
 <script src="/static/js/utils.js"></script>
 
+<script>$.ajaxSetup({ headers: { "X-CSRFToken": '{{ csrf_token }}' } });</script>
 </body>
 </html>

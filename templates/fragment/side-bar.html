@@ -3,10 +3,11 @@
     <li class="nav-item active">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-robot"></i>
-            <span>user -> {{ user.username }}</span>
+            <span>Current user: </span>
+            <span>{{ user.username }}</span>
         </a>
     </li>
-    <li class="nav-item active">
+    <li class="nav-item">
         <a class="nav-link" href="{% url 'index' %}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>

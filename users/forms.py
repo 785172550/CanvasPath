@@ -14,16 +14,20 @@ class LoginForm(forms.Form):
 
 
 class CourseForm(forms.Form):
-    course_id = forms.CharField(label="course id",
-                                widget=forms.TextInput(
-                                    attrs={'class': 'form-control', 'placeholder': 'course id', 'required': 'required',
-                                           'autofocus': 'autofocus'}))
-    course_name = forms.CharField(label="course_name",
-                                  widget=forms.TextInput(
-                                      attrs={'class': 'form-control', 'placeholder': 'name', 'required': 'required'}))
-    course_description = forms.CharField(label="course_description",
-                                         widget=forms.TextInput(
-                                             attrs={'class': 'form-control', 'placeholder': 'description'}))
+    course = forms.CharField(label="course",
+                             widget=forms.TextInput(
+                                 attrs={'class': 'form-control', 'placeholder': 'course id', 'required': 'required',
+                                        'autofocus': 'autofocus'}))
+    name = forms.CharField(label="name",
+                           widget=forms.TextInput(
+                               attrs={'class': 'form-control', 'placeholder': 'name', 'required': 'required'}))
+    dec = forms.CharField(label="dec",
+                          widget=forms.TextInput(
+                              attrs={'class': 'form-control', 'placeholder': 'description'}))
+    sec_no = forms.CharField(label="sec_no",
+                             widget=forms.TextInput(
+                                 attrs={'class': 'form-control', 'placeholder': 'description'}))
+    sec_type = forms.CharField(label="sec_type")
 
 
 class UserForm(forms.Form):
@@ -43,6 +47,5 @@ class UserForm(forms.Form):
                                attrs={'class': 'form-control', 'placeholder': 'description', 'required': 'required'}))
 
     name = forms.CharField(label="name",
-                            widget=forms.TextInput(
-                                attrs={'class': 'form-control', 'placeholder': 'description'}))
-
+                           widget=forms.TextInput(
+                               attrs={'class': 'form-control', 'placeholder': 'description'}))

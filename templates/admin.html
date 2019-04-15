@@ -16,18 +16,24 @@
                         <th>Couser id</th>
                         <th>course name</th>
                         <th>Course dec</th>
+                        <th>section no</th>
+                        <th>section type</th>
                         <th>Operation</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
                     {% for course in courses %}
                         <tr>
-                        <td><span class="text-info">{{ course.course_id }}</span></td>
-                        <td><span class="text-info">{{ course.course_name }}</span></td>
-                        <td><span class="text-info">{{ course.course_description }}</span></td>
-                        <td>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
+                            <td><span class="text-info">{{ course.course_id }}</span></td>
+                            <td><span class="text-info">{{ course.course_name }}</span></td>
+                            <td><span class="text-info">{{ course.course_description }}</span></td>
+                            <td><span class="text-info">{{ course.section.sec_no2 }}</span></td>
+                            <td><span class="text-info">{{ course.section.section_type }}</span></td>
+                            <td>
+                                <button class="btn btn-danger" onclick="delete_course('{{ course.course_id }}', this)">
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -35,6 +41,26 @@
             </div>
         </div>
         {#        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>#}
+    </div>
+
+    <div class="form-group form-inline m-3" id="cv1">
+        <label> Couser id: </label>
+        <input type="text" size="15" id="c_id" value="EE320" class="form-control m-3"
+               title="Enter filename without extension"/>
+        <label> Couser name: </label>
+        <input type="text" size="15" id="c_name" value="" class="form-control m-3"
+               title="Enter filename without extension"/>
+        <label> Couser dec: </label>
+        <input type="text" size="15" id="c_dec" value="" class="form-control m-3"
+               title="Enter filename without extension"/>
+        <label> Section no: </label>
+        <input type="text" size="15" id="sec_no" value="" class="form-control m-3"
+               title="Enter filename without extension"/>
+        <label> Section type: </label>
+        <input type="text" size="15" id="sec_type" value="" class="form-control m-3"
+               title="Enter filename without extension"/>
+        <input type="button" class="btn btn-primary" value="add course"
+               onclick="add_course($('#c_id').val(),$('#c_name').val(),$('#c_dec').val(),$('#sec_no').val(),$('#sec_type').val())"/>
     </div>
 
     <div class="card mb-3">
@@ -58,14 +84,14 @@
                     <tbody id="tbody">
                     {% for student in students %}
                         <tr>
-                        <td><span class="text-info">{{ student.first_name }}</span></td>
-                        <td><span class="text-info">{{ student.email }}</span></td>
-                        <td><span class="text-info">{{ student.gender }}</span></td>
-                        <td><span class="text-info">{{ student.address }}</span></td>
-                        <td><span class="text-info">{{ student.major }}</span></td>
-                        <td>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
+                            <td><span class="text-info">{{ student.first_name }}</span></td>
+                            <td><span class="text-info">{{ student.email }}</span></td>
+                            <td><span class="text-info">{{ student.gender }}</span></td>
+                            <td><span class="text-info">{{ student.street }}</span></td>
+                            <td><span class="text-info">{{ student.major }}</span></td>
+                            <td>
+                                <button class="btn btn-danger">To do</button>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -76,10 +102,10 @@
 
     <div class="form-group form-inline m-3" id="cv1">
         <label> course id: </label>
-        <input type="text" size="15" id="course-id" value="EE320" class="form-control"
+        <input type="text" size="15" id="course-id" value="EE320" class="form-control m-3"
                title="Enter filename without extension"/>
         <label> students email: </label>
-        <input type="text" size="15" id="students-email" value="test@gmail.com" class="form-control"
+        <input type="text" size="15" id="students-email" value="test@gmail.com" class="form-control m-3"
                title="Enter filename without extension"/>
         <input type="button" class="btn btn-primary" value="enroll course"
                onclick="enroll_student($('#course-id').val(),$('#students-email').val())"/>
@@ -108,14 +134,14 @@
                     <tbody id="tbody">
                     {% for prof in profs %}
                         <tr>
-                        <td><span class="text-info">{{ prof.first_name }}</span></td>
-                        <td><span class="text-info">{{ prof.email }}</span></td>
-                        <td><span class="text-info">{{ prof.office_address }}</span></td>
-                        <td><span class="text-info">{{ prof.department }}</span></td>
-                        <td><span class="text-info">{{ prof.title }}</span></td>
-                        <td>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
+                            <td><span class="text-info">{{ prof.first_name }}</span></td>
+                            <td><span class="text-info">{{ prof.email }}</span></td>
+                            <td><span class="text-info">{{ prof.office_address }}</span></td>
+                            <td><span class="text-info">{{ prof.department }}</span></td>
+                            <td><span class="text-info">{{ prof.title }}</span></td>
+                            <td>
+                                <button class="btn btn-danger">To do</button>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -124,25 +150,15 @@
         </div>
     </div>
 
-    <div class="form-group form-inline " id="cv2">
+    <div class="form-group form-inline m-3" id="cv2">
         <label> course id: </label>
-        <input type="text" size="15" id="course" value="EE320" class="form-control"
+        <input type="text" size="15" id="course" value="EE320" class="form-control m-3"
                title="Enter filename without extension"/>
         <label> prof email: </label>
-        <input type="text" size="15" id="prof-email" value="test@gmail.com" class="form-control"
+        <input type="text" size="15" id="prof-email" value="test@gmail.com" class="form-control m-3"
                title="Enter filename without extension"/>
-        <input type="button" class="btn btn-primary" value="assign_prof"
+        <input type="button" class="btn btn-primary" value="assign professor"
                onclick="enroll_student($('#course').val(),$('#prof-email').val())"/>
     </div>
-
-    {#    {% for student in students %}#}
-    {#        <span class="text-info">{{ student }}</span>#}
-    {#    {% endfor %}#}
-    {##}
-    {#    {% for prof in profs %}#}
-    {#        <span class="text-info">{{ prof }}</span>#}
-    {#    {% endfor %}#}
-
-
 
 {% endblock %}
