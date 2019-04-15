@@ -32,4 +32,17 @@ Sections
 Sections.objects.create(sec_no='1.0',section_type='0',course_id='EE320',limit=40)
 
 
+function assign_prof(course_id, email){
+  $.ajax({
+  type: 'POST',
+  url: url,
+  data: data,
+  success: success,
+  dataType: dataType
+});
+
+  $.post(url,data,success(data, textStatus, jqXHR),dataType)
+  $.get(URL,callback);
+  
+}
 ```
