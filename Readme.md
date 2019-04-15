@@ -45,4 +45,30 @@ function assign_prof(course_id, email){
   $.get(URL,callback);
   
 }
+
+---------
+hw = Homework.objects.filter(course_id,sec_no).all()
+hw_grades = Homework_grades.objects.filter(hw_no_in=hw.hw_no,student_email).all()
+
+
+for gra in hw_grades:
+ map[hw_no] = gra.grade
+
+-----------
+
+功能：
+UserLogIn:
+
+admin:
+1.manage the courses (add/remove),
+2.assign professors to courses
+3.enroll students to courses and sections
+
+prof:
+1.create assignments inside the section he is teaching. The assignments include homeworks and exams
+2.SubmitingScores:: should be a grades page for each assignment which includes a table whose columns are the student’s IDs and grades
+3.OrganizingTeams: The faculty member should maintain the team list and the members of each team
+
+student: CheckingInfo, course info, hw info, grade info.
+
 ```
