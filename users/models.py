@@ -74,6 +74,9 @@ class Enrolls(models.Model):
     course_id = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
     section_no = models.ForeignKey('Sections', on_delete=models.SET_NULL, null=True)
 
+    class Meta:
+        unique_together = ("course_id", "student_email")
+
 
 # teaching_team_id
 class Prof_teams(models.Model):
@@ -99,12 +102,13 @@ class Homework(models.Model):
 
 # Homework_grades (student_email, course_id, sec_no, hw_no, grade)
 class Homework_grades(models.Model):
-    hw_no = models.ForeignKey('Homework', to_field='hw_no', on_delete=models.SET_NULL, null=True)
+    course_id = models.ForeignKey('Course', to_field='course_id', on_delete=models.SET_NULL, null=True)
+    hw_details = models.TextField(null=True)
     student_email = models.ForeignKey('CustomUser', to_field='email', on_delete=models.SET_NULL, null=True)
     grade = models.CharField(max_length=5)
 
     class Meta:
-        unique_together = ("hw_no", "student_email")
+        unique_together = ("course_id", "student_email")
 
 
 # Exams (course_id, sec_no, exam_no, exam_details)

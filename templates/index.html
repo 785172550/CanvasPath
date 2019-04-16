@@ -26,15 +26,18 @@
                     </thead>
                     <tbody id="tbody">
                     {% for course in courses %}
-                        <td><span class="text-info">{{ course.course_id }}</span></td>
-                        <td><span class="text-info">{{ course.course_name }}</span></td>
-                        <td><span class="text-info">{{ course.course_description }}</span></td>
-                        <td><span class="text-info">{{ course.course_prof.first_name }}</span></td>
-                        <td><span class="text-info">{{ course.course_prof.email }}</span></td>
-                        <td><span class="text-info">{{ course.course_prof.office_address }}</span></td>
-                        <td><span class="text-info">{{ course.section.sec_no }}</span></td>
-                        <td><span class="text-info">{{ course.section.section_type }}</span></td>
-                        <td><span class="text-info">{{ gl|get_item:course_id }}</span></td>
+                        <tr>
+                            <td><span class="text-info">{{ course.course_id }}</span></td>
+                            <td><span class="text-info">{{ course.course_name }}</span></td>
+                            <td><span class="text-info">{{ course.course_description }}</span></td>
+                            <td><span class="text-info">{{ course.course_prof.first_name }}</span></td>
+                            <td><span class="text-info">{{ course.course_prof.email }}</span></td>
+                            <td><span class="text-info">{{ course.course_prof.office_address }}</span></td>
+                            <td><span class="text-info">{{ course.section.sec_no }}</span></td>
+                            <td><span class="text-info">{{ course.section.section_type }}</span></td>
+                            <!-- custom template filter in users.view -->
+                            <td><span class="text-info">{{ gl|get_item:course.course_id }}</span></td>
+                        </tr>
                     {% endfor %}
                     </tbody>
                 </table>
@@ -52,20 +55,22 @@
                 <table class="table table-bordered" id="course-table" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>hw_no</th>
-                        <th>hw_details</th>
-                        <th>course_id</th>
-                        <th>sec_no</th>
-                        <th>grade</th>
+                        <th>Course id</th>
+                        <th>HomeWork details</th>
+                        <th>student</th>
+                        <th>Prof email</th>
+                        <th>Grade</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    {% for course in courses %}
-                        <td><span class="text-info">{{ course.course_id }}</span></td>
-                        <td><span class="text-info">{{ course.course_name }}</span></td>
-                        <td><span class="text-info">{{ course.course_description }}</span></td>
-                        <td><span class="text-info">{{ course.course_prof.first_name }}</span></td>
-                        <td><span class="text-info">{{ course.course_prof.email }}</span></td>
+                    {% for hw in hws %}
+                        <tr>
+                            <td><span class="text-info">{{ hw.course_id }}</span></td>
+                            <td><span class="text-info">{{ hw.hw_details }}</span></td>
+                            <td><span class="text-info">{{ hw.student_email }}</span></td>
+                            <td><span class="text-info">{{ hw.course_id.course_prof.email }}</span></td>
+                            <td><span class="text-info">{{ hw.grade }}</span></td>
+                        </tr>
                     {% endfor %}
                     </tbody>
                 </table>

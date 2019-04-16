@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from users.models import CustomUser, Course, Enrolls, Exams, Exam_grades, Homework, Homework_grades
 
 from django.template.defaulttags import register
+
+
 # Create your views here.
 
 @login_required
@@ -16,6 +18,8 @@ def index(request):
         grades = Exam_grades.objects.filter(course_id__in=courses, student_email=user.email).all()
 
         gl = {gra.course_id: gra.grade for gra in grades}
+
+        hws = Homework_grades.objects.filter(student_email=user.email, course_id__in=courses).all()
         # for co in courses:
         #     if Exam_grades.objects.filter(course_id__in=courses, student_email=user.email).count() != 0:
         #         co.grade = Exam_grades.objects.filter(course_id__in=courses, student_email=user.email).first().grade
