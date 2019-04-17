@@ -27,7 +27,8 @@ class CustomUser(AbstractUser):
 
     # professor
     office_address = models.TextField(null=True)
-    department = models.ForeignKey('Department', on_delete=models.SET_NULL, null=True)  # many to one
+    department = models.ForeignKey('Department', to_field='dept_name', on_delete=models.SET_NULL,
+                                   null=True)  # many to one
     title = models.TextField(null=True)
 
 
@@ -43,8 +44,9 @@ class CustomUser(AbstractUser):
 
 
 class Department(models.Model):  # Department (dept_id, dept_name, dept_head)
-    dept_id = models.IntegerField(primary_key=True)
-    dept_name = models.TextField(null=True)
+    dept_id = models.AutoField(primary_key=True)
+    dept_name = models.CharField(max_length=20, unique=True, null=True)
+    dept_detail = models.CharField(max_length=50, null=True)
     dept_head = models.TextField(null=True)
 
 

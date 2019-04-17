@@ -17,13 +17,10 @@ def index(request):
         # exam_info = Exam_grades.objects.filter(course_id__in=courses, student_email=user.email).all()
         grades = Exam_grades.objects.filter(course_id__in=courses, student_email=user.email).all()
 
-        gl = {gra.course_id: gra.grade for gra in grades}
+        # make a dict {course_id: grade}
+        gl = {gra.course_id_id: gra.grade for gra in grades}
 
         hws = Homework_grades.objects.filter(student_email=user.email, course_id__in=courses).all()
-        # for co in courses:
-        #     if Exam_grades.objects.filter(course_id__in=courses, student_email=user.email).count() != 0:
-        #         co.grade = Exam_grades.objects.filter(course_id__in=courses, student_email=user.email).first().grade
-        #     if Homework.objects.filter(course_id=co.)
 
         return render(request, "index.html", locals())
     elif user.role == 'P':
@@ -38,4 +35,4 @@ def index(request):
 
 @register.filter
 def get_item(dictionary, key):
-    return dictionary.get(key)
+    return dictionary.get(key) if dictionary.get(key) else ''

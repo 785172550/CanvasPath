@@ -85,8 +85,17 @@ student cvs:
 
 
 login example:
+student:
 email aly8942@lionstate.edu
 password ixg1libp
+
+admin: 
+admin
+admin
+
+professor:
+nwo@lionstate.edu
+r403d0qn
 ```
 student login panel:
 ![image](./static/student.png)
