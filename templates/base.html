@@ -20,27 +20,33 @@
 
     <!-- Custom styles for this text-->
     <link href="/static/css/text-style.css" rel="stylesheet">
+
+    <link href="/static/js/bootstrap4-editable/css/bootstrap-editable.css" rel="stylesheet">
+
     <title>{% block title %}默认标题{% endblock %}</title>
 </head>
 <body id="page-top">
 {% include "fragment/navbar.html" %}
 <div id="wrapper">
     {% include "fragment/side-bar.html" %}
-{#    <div class="panel panel-default">#}
+    {#    <div class="panel panel-default">#}
 
-            <div id="content-wrapper">
-                {% block content %}
-                {% endblock %}
-            </div>
+    <div id="content-wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
 
-{#    </div>#}
+    {#    </div>#}
 </div>
 
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 <!-- Bootstrap core JavaScript-->
+
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="/static/vendor/jquery/jquery.min.js"></script>
+
 <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
@@ -49,13 +55,21 @@
 <!-- Page level plugin JavaScript-->
 <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
 <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
-<!-- <script src="/static/vendor/datatables/dataTables.editor.min.js"></script> -->
+
 
 <!-- Custom scripts for all pages-->
 <script src="/static/js/sb-admin.min.js"></script>
+<script src="/static/js/demo/datatables-demo.js"></script>
 
+
+<script src="/static/js/bootstrap4-editable/js/bootstrap-editable.min.js"></script>
+{#<script src="/static/js/utils.js"></script>#}
 <script src="/static/js/utils.js"></script>
 
-<script>$.ajaxSetup({ headers: { "X-CSRFToken": '{{ csrf_token }}' } });</script>
+{#<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>#}
+
+{#<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>#}
+
+<script>$.ajaxSetup({headers: {"X-CSRFToken": '{{ csrf_token }}'}});</script>
 </body>
 </html>

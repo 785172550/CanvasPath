@@ -1,14 +1,6 @@
 # coding:utf-8
 # life is short, you need Python！
 
-# import pandas as pd
-# import numpy as np
-# pd.set_option('display.max_rows', 500)
-# pd.set_option('display.max_columns', 500)
-# pd.set_option('display.width', 1000)
-# df = pd.read_csv('../static/1_Students.csv', header=None,
-#                  sep=',')
-# print(df.head(10))
 
 import os
 import django
@@ -116,43 +108,46 @@ def loadExam(row):
     print(row[35] + " grade: " + row[46])
 
 
-with open('../static/1_Students.csv', 'rt') as csvfile:
-    reader = csv.reader(csvfile)
-    rows = [row for row in reader]
+#########==================== load 1_Students.csv
 
-for row in rows[1:40]:
-    loadUser(row)
-    loadSection(row)
-    loadCourse(row)
-    loadHW(row)
-    loadExam(row)
-
-print(rows[0])
-
-
-################ ================
-# def loadProf(row):
-#     Department.objects.update_or_create(dept_name=row[5], defaults={'dept_detail': row[7]})
-#     CustomUser.objects.update_or_create(username=row[1], email=row[1],
-#                                         defaults={'first_name': row[0], 'role': 'P', 'age': row[3],
-#                                                   'gender': row[4], 'password': make_password(row[2]),
-#                                                   'department_id': row[5],
-#                                                   'office_address': row[6], 'title': row[8]})
+# with open('../static/1_Students.csv', 'rt') as csvfile:
+#     reader = csv.reader(csvfile)
+#     rows = [row for row in reader]
 #
+###  change 40 to len(rows) - 1, will load all rows of 1_Students.csv
+# for row in rows[1:40]:
+#     loadUser(row)
+#     loadSection(row)
+#     loadCourse(row)
+#     loadHW(row)
+#     loadExam(row)
 #
-#
-# with open('../static/Professors.csv', 'rt') as csvfile:
-#     reader2 = csv.reader(csvfile)
-#     rows2 = [row for row in reader2]
-#
-# for row in rows2[1:len(rows2) - 1]:
-#     loadProf(row)
+# print(rows[0])
 
 
-    ############# ==========
+################ ================ load Professors.csv
 
-    # print(rows[1])
-    # print(rows[1:3])
+def loadProf(row):
+    Department.objects.update_or_create(dept_name=row[5], defaults={'dept_detail': row[7]})
+    CustomUser.objects.update_or_create(username=row[1], email=row[1],
+                                        defaults={'first_name': row[0], 'role': 'P', 'age': row[3],
+                                                  'gender': row[4], 'password': make_password(row[2]),
+                                                  'department_id': row[5],
+                                                  'office_address': row[6], 'title': row[8]})
+    Course.objects.update_or_create(course_id=row[10], defaults={'course_prof_id': row[1]})
 
-    # row[14] course1 type, row15 sectio no, row16 limit, row26 c2 type, row27 sec no, c28 limit, row38 type, row39 sec, row40 limit
-    # Street row9,
+
+with open('../static/Professors.csv', 'rt') as csvfile:
+    reader2 = csv.reader(csvfile)
+    rows2 = [row for row in reader2]
+
+for row in rows2[1:len(rows2) - 1]:
+    loadProf(row)
+
+
+############# ==========
+# print(rows[1])
+# print(rows[1:3])
+
+# row[14] course1 type, row15 sectio no, row16 limit, row26 c2 type, row27 sec no, c28 limit, row38 type, row39 sec, row40 limit
+# Street row9,

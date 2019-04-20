@@ -2,15 +2,14 @@
 {% block content %}
     <h2>Admin panel</h2>
 
-
     <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-table"></i>
-            Couser Management
+            Course Management
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="course-table" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="couser_manage" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th>Couser id</th>
@@ -70,7 +69,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="student-table" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="student_table" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th>name</th>
@@ -120,7 +119,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="prof-table" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="prof_table" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th>name</th>
@@ -158,7 +157,7 @@
         <input type="text" size="15" id="prof-email" value="test@gmail.com" class="form-control m-3"
                title="Enter filename without extension"/>
         <input type="button" class="btn btn-primary" value="assign professor"
-               onclick="enroll_student($('#course').val(),$('#prof-email').val())"/>
+               onclick="assign_prof($('#course').val(),$('#prof-email').val())"/>
     </div>
 
 {% endblock %}

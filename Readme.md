@@ -89,6 +89,9 @@ student:
 email aly8942@lionstate.edu
 password ixg1libp
 
+aok9861@lionstate.edu
+o81zf7vv
+
 admin: 
 admin
 admin

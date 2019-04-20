@@ -24,8 +24,13 @@ def index(request):
 
         return render(request, "index.html", locals())
     elif user.role == 'P':
-        print(str(user.get_role_display) + " login success!")
-        return render(request, "prof-index.html")
+        # print(str(user.get_role_display) + " login success!")
+        courses = Course.objects.filter(course_prof=user.email).all()
+        enroll_map = {course.course_id: Enrolls.objects.filter(course_id=course).all() for course in courses}
+        # print(enroll_map)
+        # students = [enroll.student_email for enroll in enrolls]
+
+        return render(request, "prof-index.html", locals())
     else:
         students = CustomUser.objects.filter(role='S').all()
         profs = CustomUser.objects.filter(role='P').all()
@@ -36,3 +41,20 @@ def index(request):
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key) if dictionary.get(key) else ''
+
+
+@register.filter
+def filter_by_key(dictionary, key):
+    students = dictionary.get(key)
+    print(students)
+    return students
+
+
+@register.filter
+def get_grade(email, course):
+    return Exam_grades.objects.filter(course_id=course, student_email=email).first().grade
+
+
+@register.filter
+def get_hw_grade(email, course):
+    return Homework_grades.objects.filter(course_id=course, student_email=email).first().grade

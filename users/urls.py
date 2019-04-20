@@ -15,4 +15,6 @@ urlpatterns = [
     path('create_hw_grade/', views.create_hw_grade, name='create_hw_grade'),
     path('create_exam_grade/', views.create_exam_grade, name='create_exam_grade'),
     path('add_course/', views.manage_course, name='add_course'),
+    path('hw_change/', views.hw_change, name='hw_change'),
+    path('grade_change/', views.grade_change, name='grade_change'),
 ]

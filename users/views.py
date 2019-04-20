@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, CourseForm, UserForm
 from django.contrib.auth import login as slogin, authenticate, logout as slogout
-from .models import CustomUser, Course, Enrolls, Sections
+from .models import CustomUser, Course, Enrolls, Sections, Exam_grades, Homework_grades
 from django.http import JsonResponse, HttpResponse
 import json
 from django.forms.models import model_to_dict
@@ -102,12 +102,45 @@ def assign_prof(request):
         return JsonResponse(res)
 
 
+def grade_change(request):
+    if request.method == 'POST':
+        email_c = request.POST.get('name', None)
+        email, c_id = email_c.split('_')
+        value = request.POST.get('value', None)
+
+        Exam_grades.objects.filter(course_id=c_id, student_email=email).update(grade=value)
+        print('Exam_grades update to ' + value)
+        return HttpResponse('ok')
+
+
+def hw_change(request):
+    if request.method == 'POST':
+        email_c = request.POST.get('name', None)
+        email, c_id = email_c.split('_')
+        value = request.POST.get('value', None)
+
+        Homework_grades.objects.filter(course_id=c_id, student_email=email).update(grade=value)
+        print('Homework_grades update to' + value)
+        return HttpResponse('ok')
+
+
 def create_hw(request):
-    pass
+    if request.method == 'GET':
+        email = request.GET.get('prof_email', None)
+        course_id = request.GET.get('course', None)
+
+        print('create_hw ' + value)
+        return HttpResponse('ok')
+
 
 
 def create_exam(request):
-    pass
+    if request.method == 'GET':
+        email = request.GET.get('prof_email', None)
+        course_id = request.GET.get('course', None)
+
+        print('create_exam ' + value)
+        return HttpResponse('ok')
 
 
 def create_hw_grade(request):
