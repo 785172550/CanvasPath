@@ -8,7 +8,7 @@ from django.template.defaulttags import register
 
 # Create your views here.
 
-@login_required
+@login_required(login_url='/users/login')
 def index(request):
     user = request.user
     if user.role == 'S':
