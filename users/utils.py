@@ -110,19 +110,19 @@ def loadExam(row):
 
 #########==================== load 1_Students.csv
 
-# with open('../static/1_Students.csv', 'rt') as csvfile:
-#     reader = csv.reader(csvfile)
-#     rows = [row for row in reader]
-#
-###  change 40 to len(rows) - 1, will load all rows of 1_Students.csv
-# for row in rows[1:40]:
-#     loadUser(row)
-#     loadSection(row)
-#     loadCourse(row)
-#     loadHW(row)
-#     loadExam(row)
-#
-# print(rows[0])
+with open('../static/1_Students.csv', 'rt') as csvfile:
+    reader = csv.reader(csvfile)
+    rows = [row for row in reader]
+
+##  change 40 to len(rows) - 1, will load all rows of 1_Students.csv
+for row in rows[1:100]:
+    loadUser(row)
+    loadSection(row)
+    loadCourse(row)
+    loadHW(row)
+    loadExam(row)
+
+print(rows[0])
 
 
 ################ ================ load Professors.csv
@@ -136,13 +136,12 @@ def loadProf(row):
                                                   'office_address': row[6], 'title': row[8]})
     Course.objects.update_or_create(course_id=row[10], defaults={'course_prof_id': row[1]})
 
-
-with open('../static/Professors.csv', 'rt') as csvfile:
-    reader2 = csv.reader(csvfile)
-    rows2 = [row for row in reader2]
-
-for row in rows2[1:len(rows2) - 1]:
-    loadProf(row)
+# with open('../static/Professors.csv', 'rt') as csvfile:
+#     reader2 = csv.reader(csvfile)
+#     rows2 = [row for row in reader2]
+#
+# for row in rows2[1:len(rows2) - 1]:
+#     loadProf(row)
 
 
 ############# ==========

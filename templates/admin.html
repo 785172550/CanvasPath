@@ -29,7 +29,8 @@
                             <td><span class="text-info">{{ course.section.sec_no2 }}</span></td>
                             <td><span class="text-info">{{ course.section.section_type }}</span></td>
                             <td>
-                                <button class="btn btn-danger" onclick="delete_course('{{ course.course_id }}', this)">
+                                <button class="btn btn-danger"
+                                        onclick="delete_course('{{ course.course_id }}', this)">
                                     Delete
                                 </button>
                             </td>
@@ -158,6 +159,8 @@
                title="Enter filename without extension"/>
         <input type="button" class="btn btn-primary" value="assign professor"
                onclick="assign_prof($('#course').val(),$('#prof-email').val())"/>
+        <input type="button" class="btn btn-primary" value="assign professor"
+               onclick="http_get('/users/enroll/',{'course':$('#course').val(),'student_email':$('#prof-email').val()})"/>
     </div>
 
 {% endblock %}
